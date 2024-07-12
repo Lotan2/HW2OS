@@ -5,7 +5,7 @@ asmlinkage long sys_hello(void) {
 	return 0;
 }
 
-asmlinkage int set_weight(int newweight) {
+asmlinkage int sys_set_weight(int newweight) {
 	if(newweight < 0) {
 		return -EINVAL;	
 	}	
@@ -13,11 +13,11 @@ asmlinkage int set_weight(int newweight) {
 	return 0;
 }
 
-asmlinkage int get_weight(void) {
+asmlinkage int sys_get_weight(void) {
 	return weight;
 }
 
-asmlinkage int get_path_sum(pid_t target) {
+asmlinkage int sys_get_path_sum(pid_t target) {
 	struct task_struct *target_task;
 	struct task_struct *current_task = current;
 	int sum = 0;
@@ -51,7 +51,7 @@ asmlinkage int get_path_sum(pid_t target) {
 	return -ECHILD;
 }
 
-asmlinkage pid_t get_heaviest_sibling(void) {
+asmlinkage pid_t sys_get_heaviest_sibling(void) {
 	pid_t minPID = current->pid;
 	int minWeight = current->weight;	
 	for_each_process( potSib )
